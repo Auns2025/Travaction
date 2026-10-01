@@ -1,164 +1,88 @@
-export default function Hero() {
+import { ArrowRight, Plane } from "lucide-react";
+import amalfiImg from "../assets/amalfi_coast.jpg";
+import womanImg from "../assets/woman_walking.jpg";
+import balloonsImg from "../assets/hot_air_balloons.jpg";
+
+const Home = () => {
   return (
-    <section
-      className="relative w-full min-h-[calc(100vh-85px)] max-h-[840px] flex items-center px-6 md:px-12 lg:px-16 py-6 lg:py-8 bg-cream overflow-hidden"
-      aria-label="Hero Section"
-    >
-      {/* Layer 1: Soft Beige Background Wave */}
+    <div className="relative min-h-[calc(100vh-100px)] overflow-hidden flex items-center">
+      {/* Decorative SVG Paths */}
       <svg
-        className="absolute bottom-0 left-0 w-full sm:w-[75%] h-[68%] pointer-events-none z-0 opacity-75"
-        viewBox="0 0 800 480"
+        className="absolute top-0 left-0 text-[#e6d9ce] -z-10"
+        width="150"
+        height="200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        aria-hidden="true"
       >
         <path
-          d="M -50 480 L -50 200 C 140 160, 320 250, 460 320 C 600 390, 700 330, 850 480 Z"
-          fill="#EADCCB"
+          d="M0 150 C 50 150, 100 100, 150 0"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeDasharray="6 6"
         />
       </svg>
-
-      {/* Layer 2: Main Warm Sand Blob Shape (Matching Reference) */}
       <svg
-        className="absolute bottom-0 left-0 w-[90%] sm:w-[58%] h-[50%] pointer-events-none z-0 opacity-90"
-        viewBox="0 0 650 360"
+        className="absolute bottom-10 left-10 text-[#e6d9ce] -z-10"
+        width="200"
+        height="150"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        aria-hidden="true"
       >
         <path
-          d="M -50 360 L -50 160 C 90 120, 200 110, 310 190 C 420 270, 500 280, 700 360 Z"
-          fill="#CCA27E"
+          d="M0 100 C 50 100, 100 150, 200 50"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeDasharray="6 6"
+        />
+        <Plane
+          x="170"
+          y="20"
+          className="text-primary fill-primary rotate-45"
+          size={24}
         />
       </svg>
+      
+      {/* Bottom left beige blob */}
+      <div className="absolute bottom-0 left-0 w-96 h-64 bg-[#e3cdbb] opacity-40 rounded-tr-full -z-10"></div>
+      <div className="absolute bottom-[-100px] left-[200px] w-96 h-64 bg-[#d8bca6] opacity-40 rounded-t-full -z-10"></div>
 
-      {/* Decorative Dashed Flight Path (Top Left Curve) */}
-      <svg
-        className="hidden md:block absolute top-[8%] left-[2%] w-[120px] h-[250px] pointer-events-none z-10 opacity-60"
-        viewBox="0 0 140 280"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M 15 250 C 55 190, 110 120, 35 35 C 20 15, 10 25, 25 5"
-          stroke="#B59678"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-        />
-        <g transform="translate(22, 2) rotate(-35)">
-          <path d="M8 0L10 4L16 6L10 8L8 14L6 8L0 6L6 4L8 0Z" fill="#A96F3E" />
-        </g>
-      </svg>
-
-      {/* Decorative Dashed Flight Path (Bottom Left Curve with Airplane) */}
-      <svg
-        className="hidden md:block absolute bottom-[10%] left-[3%] w-[220px] h-[130px] pointer-events-none z-10 opacity-75"
-        viewBox="0 0 240 140"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M 10 110 C 80 135, 150 90, 210 35"
-          stroke="#B59678"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-        />
-        <g transform="translate(210, 30) rotate(38)">
-          <path d="M8 0L10 4L16 6L10 8L8 14L6 8L0 6L6 4L8 0Z" fill="#A96F3E" />
-        </g>
-      </svg>
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
-        {/* Left Column Content Area */}
-        <div className="w-full lg:w-[42%] max-w-lg flex flex-col justify-center">
-          <div className="flex flex-col mb-4 select-none">
-            <h1 className="flex flex-col">
-              <span className="font-serif text-5xl sm:text-6xl lg:text-[5.2rem] font-semibold text-dark-brown leading-[0.92] tracking-tight">
-                Explore
-              </span>
-              <span className="font-script text-5xl sm:text-6xl lg:text-[4.8rem] text-warm-brown leading-none -mt-2 sm:-mt-4 ml-1">
-                the World
-              </span>
-            </h1>
-          </div>
-
-          <p className="text-muted-brown text-base sm:text-lg leading-relaxed font-normal mb-8 max-w-sm">
-            Let’s journey to the most beautiful places
-            <br className="hidden sm:inline" /> and create unforgettable memories.
+      <div className="max-w-7xl mx-auto w-full px-10 md:px-20 grid md:grid-cols-2 gap-12 items-center">
+        {/* Left Content */}
+        <div className="max-w-xl">
+          <h1 className="text-6xl md:text-[5.5rem] font-serif leading-[1.1] text-text-dark font-medium">
+            Explore <br />
+            <span className="font-cursive text-primary font-normal text-7xl md:text-[6.5rem]">the World</span>
+          </h1>
+          <p className="mt-6 text-text-light text-lg md:text-xl font-medium leading-relaxed max-w-md">
+            Let's journey to the most beautiful places and create unforgettable memories.
           </p>
-
-          <div>
-            <button
-              type="button"
-              className="inline-flex items-center gap-3 bg-warm-brown hover:bg-warm-brown-dark text-white px-7 py-3.5 rounded-full text-base font-medium shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 group cursor-pointer"
-            >
-              <span>Plan Your Trip</span>
-              <svg
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+          <button className="mt-10 bg-primary hover:bg-primary-dark transition-colors text-white px-8 py-3.5 rounded-full text-base font-medium flex items-center gap-3">
+            Plan Your Trip <ArrowRight size={18} />
+          </button>
         </div>
 
-        {/* Right Column Asymmetrical Interlocking Image Collage */}
-        <div className="w-full lg:w-[56%] flex justify-center lg:justify-end items-center">
-          <div className="grid grid-cols-[1.15fr_0.85fr] gap-3.5 sm:gap-4 w-full max-w-[650px] relative">
-            {/* Top Left: Positano Amalfi Coast */}
-            <div className="relative overflow-hidden h-[260px] sm:h-[315px] rounded-[80px_35px_40px_70px] border-[5px] sm:border-[6px] border-white bg-white shadow-md hover:shadow-xl transition-all duration-500 group">
-              <img
-                src="/images/hero-coast.jpg"
-                alt="Amalfi Coast Positano cliffside village with cathedral dome"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 rounded-[74px_29px_34px_64px]"
-                loading="eager"
-              />
-            </div>
-
-            {/* Top Right: Traveler in Mediterranean Street */}
-            <div className="relative overflow-hidden h-[280px] sm:h-[330px] -mt-2 rounded-[40px_60px_45px_75px] border-[5px] sm:border-[6px] border-white bg-white shadow-md hover:shadow-xl transition-all duration-500 group">
-              <img
-                src="/images/hero-traveler.jpg"
-                alt="Female traveler walking down sunny Mediterranean alley"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 rounded-[34px_54px_39px_69px]"
-                loading="eager"
-              />
-            </div>
-
-            {/* Bottom Left: Cappadocia Balloons */}
-            <div className="relative overflow-hidden h-[180px] sm:h-[230px] w-[86%] ml-auto mt-1 rounded-[75px_35px_60px_65px] border-[5px] sm:border-[6px] border-white bg-white shadow-md hover:shadow-xl transition-all duration-500 group">
-              <img
-                src="/images/hero-balloons.jpg"
-                alt="Hot air balloons hovering over Cappadocia rock valleys"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 rounded-[69px_29px_54px_59px]"
-                loading="eager"
-              />
-            </div>
-
-            {/* Bottom Right: Maldives Tropical Beach */}
-            <div className="relative overflow-hidden h-[170px] sm:h-[215px] w-[108%] -ml-[8%] -mt-3 rounded-[65px_45px_50px_60px] border-[5px] sm:border-[6px] border-white bg-white shadow-md hover:shadow-xl transition-all duration-500 group">
-              <img
-                src="/images/hero-beach.jpg"
-                alt="Tropical beach resort with leaning palm tree and wooden bungalow"
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 rounded-[59px_39px_44px_54px]"
-                loading="eager"
-              />
-            </div>
-          </div>
+        {/* Right Content - Collage */}
+        <div className="grid grid-cols-2 gap-4 h-[600px] mt-10 md:mt-0 relative">
+           <div className="flex flex-col gap-4">
+              <div className="h-[55%] w-full rounded-[4rem] rounded-br-[1rem] overflow-hidden shadow-lg transform transition-transform hover:scale-[1.02]">
+                 <img src={amalfiImg} alt="Amalfi Coast" className="w-full h-full object-cover" />
+              </div>
+              <div className="h-[45%] w-full rounded-[4rem] rounded-tr-[1rem] overflow-hidden shadow-lg transform transition-transform hover:scale-[1.02]">
+                 <img src={balloonsImg} alt="Hot Air Balloons" className="w-full h-full object-cover" />
+              </div>
+           </div>
+           <div className="flex flex-col gap-4 mt-12">
+              <div className="h-[45%] w-full rounded-[4rem] rounded-bl-[1rem] overflow-hidden shadow-lg transform transition-transform hover:scale-[1.02]">
+                 <img src={womanImg} alt="Woman Walking" className="w-full h-full object-cover" />
+              </div>
+              <div className="h-[55%] w-full rounded-[4rem] rounded-tl-[1rem] overflow-hidden shadow-lg transform transition-transform hover:scale-[1.02]">
+                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop" alt="Tropical Beach" className="w-full h-full object-cover" />
+              </div>
+           </div>
         </div>
       </div>
-    </section>
-  )
-}
+    </div>
+  );
+};
+
+export default Home;
