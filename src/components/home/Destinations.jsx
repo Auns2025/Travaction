@@ -1,23 +1,52 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
 import { ArrowRight, Star, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionHeading from '../common/SectionHeading'
 import { emiratesList, uaeDestinations } from '../../data/destinations'
 import { gsap } from '../../lib/gsap'
 
+const GAP = 24 // must match gap-6
+const DURATION = 0.9
+const EASE = 'power3.out'
+
+// Same breakpoints/vw values as the original Tailwind classes, in pixels
+function getSizes() {
+  const w = typeof window === 'undefined' ? 1280 : window.innerWidth
+  if (w >= 1024) return { active: Math.round(w * 0.64), inactive: Math.round(w * 0.25) }
+  if (w >= 768) return { active: Math.round(w * 0.66), inactive: Math.round(w * 0.28) }
+  if (w >= 640) return { active: Math.round(w * 0.7), inactive: Math.round(w * 0.32) }
+  return { active: Math.round(w * 0.75), inactive: Math.round(w * 0.4) }
+}
+
 export default function Destinations() {
   const [activeEmirate, setActiveEmirate] = useState('Dubai')
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [sizes, setSizes] = useState(getSizes)
+
   const trackRef = useRef(null)
   const tabRefs = useRef([])
   const pillRef = useRef(null)
+  const snapRef = useRef(true) // true = jump instantly (mount / tab change / resize)
+  const prevSizesRef = useRef(sizes)
+  const dragRef = useRef({ startX: 0, moved: false, active: false })
 
   const filteredItems = uaeDestinations.filter(
     (item) => item.emirate.toLowerCase() === activeEmirate.toLowerCase()
   )
 
-  // Reset index on tab change with smooth entrance
+  // Keep pixel sizes in sync with the viewport
   useEffect(() => {
-    setCurrentIndex(0)
+    const onResize = () => {
+      const next = getSizes()
+      setSizes((prev) =>
+        prev.active === next.active && prev.inactive === next.inactive ? prev : next
+      )
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  // Entrance animation on tab change
+  useEffect(() => {
     if (trackRef.current) {
       gsap.fromTo(
         trackRef.current.children,
@@ -27,10 +56,10 @@ export default function Destinations() {
     }
   }, [activeEmirate])
 
-  // Update animated pill indicator under tabs
+  // Animated pill indicator under tabs
   useEffect(() => {
-    const activeIndex = emiratesList.indexOf(activeEmirate)
-    const activeTab = tabRefs.current[activeIndex]
+    const activeIdx = emiratesList.indexOf(activeEmirate)
+    const activeTab = tabRefs.current[activeIdx]
     if (activeTab && pillRef.current) {
       gsap.to(pillRef.current, {
         x: activeTab.offsetLeft,
@@ -41,33 +70,73 @@ export default function Destinations() {
     }
   }, [activeEmirate])
 
-  // Perfectly symmetric GSAP track scroll for both Forward (Next) and Reverse (Prev)
-  useEffect(() => {
+  // Single source of truth for slider motion: track position + card widths
+  // are animated together, so they can never drift out of sync.
+  useLayoutEffect(() => {
     const track = trackRef.current
-    if (!track || !track.children[0]) return
+    if (!track) return
 
-    const activeCard = track.children[currentIndex]
-    if (!activeCard) return
+    const cards = Array.from(track.children)
+    const { active, inactive } = sizes
+    // Every card before the active one is inactive in the final layout,
+    // so the final offset is deterministic (no measuring mid-transition).
+    const x = -currentIndex * (inactive + GAP)
 
-    gsap.to(track, {
-      scrollLeft: activeCard.offsetLeft - track.offsetLeft,
-      duration: 0.8,
-      ease: 'power3.out',
-      overwrite: 'auto',
+    const sizesChanged = prevSizesRef.current !== sizes
+    prevSizesRef.current = sizes
+
+    if (snapRef.current || sizesChanged) {
+      snapRef.current = false
+      gsap.killTweensOf([track, ...cards], 'x,width')
+      gsap.set(track, { x })
+      cards.forEach((card, i) => {
+        gsap.set(card, { width: i === currentIndex ? active : inactive })
+      })
+      return
+    }
+
+    gsap.to(track, { x, duration: DURATION, ease: EASE, overwrite: 'auto' })
+    cards.forEach((card, i) => {
+      gsap.to(card, {
+        width: i === currentIndex ? active : inactive,
+        duration: DURATION,
+        ease: EASE,
+        overwrite: 'auto',
+      })
     })
-  }, [currentIndex, activeEmirate])
+  }, [currentIndex, activeEmirate, sizes])
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1))
-  }
-
-  const handleNext = () => {
+  const handlePrev = () => setCurrentIndex((prev) => Math.max(0, prev - 1))
+  const handleNext = () =>
     setCurrentIndex((prev) => Math.min(filteredItems.length - 1, prev + 1))
-  }
 
   const handleTabChange = (emirate) => {
     if (emirate === activeEmirate) return
+    snapRef.current = true // new cards: place instantly, no slide from old position
     setActiveEmirate(emirate)
+    setCurrentIndex(0)
+  }
+
+  // Swipe / drag support
+  const onPointerDown = (e) => {
+    dragRef.current = { startX: e.clientX, moved: false, active: true }
+  }
+  const onPointerMove = (e) => {
+    const d = dragRef.current
+    if (d.active && Math.abs(e.clientX - d.startX) > 8) d.moved = true
+  }
+  const onPointerUp = (e) => {
+    const d = dragRef.current
+    if (!d.active) return
+    d.active = false
+    const dx = e.clientX - d.startX
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) handleNext()
+      else handlePrev()
+    }
+  }
+  const onPointerLeave = () => {
+    dragRef.current.active = false
   }
 
   return (
@@ -78,7 +147,6 @@ export default function Destinations() {
 
       {/* Header Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-        
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10">
           <SectionHeading
             align="left"
@@ -148,100 +216,115 @@ export default function Destinations() {
             })}
           </div>
         </div>
-
       </div>
 
-      {/* Full Width Slider Matching the Red Boxes Image Sizing (Active Card: 70% width, Next Card: 26% width) */}
+      {/* Slider: viewport clips, track moves via transform */}
       <div className="w-full pl-6 md:pl-12 lg:pl-16 relative z-10">
         <div
-          ref={trackRef}
-          className="flex items-center gap-6 overflow-x-auto no-scrollbar pb-8 pr-12 md:pr-24"
+          className="overflow-hidden pb-8"
+          style={{ touchAction: 'pan-y' }}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerLeave}
+          onPointerLeave={onPointerLeave}
         >
-          {filteredItems.map((item, index) => {
-            const isActiveCard = index === currentIndex
+          <div
+            ref={trackRef}
+            className="flex items-center gap-6 will-change-transform"
+          >
+            {filteredItems.map((item, index) => {
+              const isActiveCard = index === currentIndex
 
-            return (
-              <div
-                key={item.id}
-                onClick={() => setCurrentIndex(index)}
-                style={{
-                  transition: 'width 0.8s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.8s cubic-bezier(0.215, 0.61, 0.355, 1)',
-                }}
-                className={`shrink-0 relative rounded-3xl md:rounded-[2.2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.55)] border border-white/20 cursor-pointer select-none group transform-gpu backface-hidden translate-z-0 h-[56vh] sm:h-[62vh] md:h-[68vh] ${
-                  isActiveCard
-                    ? 'w-[75vw] sm:w-[70vw] md:w-[66vw] lg:w-[64vw] ring-2 ring-[#fa9c24] opacity-100 z-20'
-                    : 'w-[40vw] sm:w-[32vw] md:w-[28vw] lg:w-[25vw] opacity-75 hover:opacity-95 z-10'
-                }`}
-              >
-                {/* Background Full Landscape Image */}
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 transform-gpu"
-                />
+              return (
+                // Width on this wrapper is animated by GSAP (see layout effect)
+                <div key={item.id} className="shrink-0 h-[56vh] sm:h-[62vh] md:h-[68vh]">
+                  <div
+                    onClick={() => {
+                      if (dragRef.current.moved) return // ignore click after a drag
+                      setCurrentIndex(index)
+                    }}
+                    style={{ transition: 'opacity 0.6s ease' }}
+                    className={`relative w-full h-full rounded-3xl md:rounded-[2.2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.55)] border border-white/20 cursor-pointer select-none group transform-gpu ${
+                      isActiveCard
+                        ? 'ring-2 ring-[#fa9c24] opacity-100 z-20'
+                        : 'opacity-75 hover:opacity-95 z-10'
+                    }`}
+                  >
+                    {/* Background Full Landscape Image */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      draggable={false}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 transform-gpu"
+                    />
 
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 pointer-events-none" />
+                    {/* Dark Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 pointer-events-none" />
 
-                {/* Top Left Emirate Pill Badge */}
-                <div className="absolute top-6 left-6 z-10">
-                  <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/40 backdrop-blur-md text-white border border-white/20 flex items-center gap-1.5 shadow-md">
-                    <MapPin className="w-3.5 h-3.5 text-[#fa9c24]" />
-                    {item.emirate}
-                  </span>
-                </div>
+                    {/* Top Left Emirate Pill Badge */}
+                    <div className="absolute top-6 left-6 z-10">
+                      <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/40 backdrop-blur-md text-white border border-white/20 flex items-center gap-1.5 shadow-md">
+                        <MapPin className="w-3.5 h-3.5 text-[#fa9c24]" />
+                        {item.emirate}
+                      </span>
+                    </div>
 
-                {/* Top Right Rating Badge */}
-                <div className="absolute top-6 right-6 z-10">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fa9c24] text-white flex items-center gap-1 shadow-md">
-                    <Star className="w-3.5 h-3.5 fill-white text-white" />
-                    {item.rating}
-                  </span>
-                </div>
+                    {/* Top Right Rating Badge */}
+                    <div className="absolute top-6 right-6 z-10">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fa9c24] text-white flex items-center gap-1 shadow-md">
+                        <Star className="w-3.5 h-3.5 fill-white text-white" />
+                        {item.rating}
+                      </span>
+                    </div>
 
-                {/* Bottom Main Content Matching User's Red Box Screenshot */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12 z-10 text-white flex flex-col justify-end transform-gpu">
-                  
-                  {/* Orange Line + Category */}
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-6 h-[2.5px] bg-[#fa9c24] rounded-full" />
-                    <span className="text-xs uppercase font-extrabold tracking-[0.2em] text-[#fa9c24]">
-                      {item.category}
-                    </span>
-                  </div>
+                    {/* Bottom Main Content */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-12 z-10 text-white flex flex-col justify-end transform-gpu">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="w-6 h-[2.5px] bg-[#fa9c24] rounded-full" />
+                        <span className="text-xs uppercase font-extrabold tracking-[0.2em] text-[#fa9c24]">
+                          {item.category}
+                        </span>
+                      </div>
 
-                  {/* Large High Contrast Title */}
-                  <h3 className={`font-black uppercase tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] font-sans max-w-4xl transform-gpu transition-all duration-500 ${
-                    isActiveCard ? 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl' : 'text-xl sm:text-2xl md:text-3xl line-clamp-1'
-                  }`}>
-                    {item.title}
-                  </h3>
-
-                  {/* Subtitle Line & Bottom Row */}
-                  <div className="mt-4 pt-3 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <p className={`text-slate-100 font-medium leading-relaxed drop-shadow-sm ${
-                      isActiveCard ? 'text-xs sm:text-sm line-clamp-2 max-w-xl' : 'text-[11px] line-clamp-1 max-w-xs opacity-80'
-                    }`}>
-                      {item.tagline}
-                    </p>
-
-                    {/* Discover Button on Active Card */}
-                    {isActiveCard && (
-                      <button
-                        type="button"
-                        className="inline-flex items-center gap-2.5 bg-[#fa9c24] hover:bg-[#e08b1d] text-white px-6 py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                      <h3
+                        className={`font-black uppercase tracking-tight leading-[0.95] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] font-sans max-w-4xl transform-gpu transition-all duration-500 ${
+                          isActiveCard
+                            ? 'text-3xl sm:text-5xl md:text-6xl lg:text-7xl'
+                            : 'text-xl sm:text-2xl md:text-3xl line-clamp-1'
+                        }`}
                       >
-                        <span>Discover Experience</span>
-                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
-                    )}
-                  </div>
+                        {item.title}
+                      </h3>
 
+                      <div className="mt-4 pt-3 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <p
+                          className={`text-slate-100 font-medium leading-relaxed drop-shadow-sm ${
+                            isActiveCard
+                              ? 'text-xs sm:text-sm line-clamp-2 max-w-xl'
+                              : 'text-[11px] line-clamp-1 max-w-xs opacity-80'
+                          }`}
+                        >
+                          {item.tagline}
+                        </p>
+
+                        {isActiveCard && (
+                          <button
+                            type="button"
+                            className="inline-flex items-center gap-2.5 bg-[#fa9c24] hover:bg-[#e08b1d] text-white px-6 py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 shrink-0 cursor-pointer"
+                          >
+                            <span>Discover Experience</span>
+                            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </div>
 
@@ -259,7 +342,6 @@ export default function Destinations() {
           SCROLL / DRAG JOURNEY
         </span>
       </div>
-
     </section>
   )
 }
