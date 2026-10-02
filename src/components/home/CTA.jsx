@@ -1,87 +1,106 @@
 import React, { useEffect, useRef } from 'react'
-import { Plane, Sparkles, PhoneCall } from 'lucide-react'
-import Button from '../common/Button'
+import { ArrowRight } from 'lucide-react'
 import { gsap } from '../../lib/gsap'
 
 export default function CTA() {
   const ctaRef = useRef(null)
-  const planeRef = useRef(null)
 
   useEffect(() => {
     const el = ctaRef.current
     if (!el) return
 
     const ctx = gsap.context(() => {
-      if (planeRef.current) {
-        gsap.to(planeRef.current, {
-          x: 40,
-          y: -30,
-          rotate: 10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      }
+      gsap.from('.cta-content', {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 80%',
+        },
+      })
     }, el)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={ctaRef} className="relative py-12 md:py-20 bg-white overflow-hidden" id="cta">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+    <section ref={ctaRef} className="relative w-full overflow-hidden bg-transparent" id="cta">
+      <div className="w-full">
         
-        {/* Banner padding p-6 md:p-10 lg:p-12 kar di taake height kam ho jaye */}
-        <div className="relative rounded-3xl md:rounded-[2.5rem] bg-gradient-to-r from-[#fa9c24] via-[#fa9c24] to-[#015fc9] p-6 md:p-10 lg:p-12 text-white shadow-2xl shadow-[#fa9c24]/25 border border-white/30 overflow-hidden">
+        {/* Main Banner Container */}
+        <div className="relative overflow-hidden shadow-2xl min-h-[280px] sm:min-h-[320px] md:min-h-[360px] flex items-center w-full bg-[#0b1c24]">
           
-          <div className="absolute -top-24 -left-24 w-80 h-80 bg-white/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-black/15 rounded-full blur-3xl pointer-events-none" />
-          
+          {/* Background Image with absolute path */}
           <div
-            ref={planeRef}
-            className="absolute top-8 right-8 lg:right-16 text-white/25 pointer-events-none select-none hidden sm:block"
-          >
-            <Plane className="w-36 h-36 md:w-48 md:h-48 rotate-[25deg]" />
-          </div>
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
+            style={{
+              backgroundImage: `url('/images/fjord-sunset.png')`,
+            }}
+          />
 
-          <div className="relative z-10 max-w-2xl space-y-4">
+          {/* Lighter Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0b1c24]/70 via-[#0b1c24]/40 to-transparent" />
+
+          {/* Content Wrapper */}
+          <div className="relative z-10 w-full px-6 sm:px-10 md:px-16 py-10 md:py-12 grid grid-cols-1 lg:grid-cols-12 items-center gap-8">
             
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white border border-white/30">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-              Start Your Journey Today
+            {/* Left Side Copy & CTA Buttons */}
+            <div className="cta-content lg:col-span-8 space-y-4 max-w-2xl">
+              
+              {/* Eyebrow with line indicator */}
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-0.5 bg-[#fa9c24] rounded-full" />
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#fa9c24]">
+                  READY FOR YOUR NEXT ADVENTURE?
+                </span>
+              </div>
+
+              {/* Main Headline */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white tracking-tight leading-[1.15]">
+                Let's Go, So Pack Your Bags{' '}
+                <span className="italic font-normal text-[#fa9c24] block mt-1">
+                  for Exciting Trips!
+                </span>
+              </h2>
+
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed max-w-xl">
+                Discover incredible destinations, exclusive deals and unforgettable experiences. Your next adventure is just a click away.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="pt-1 flex flex-wrap items-center gap-3">
+                
+                {/* Browse Destinations */}
+                <a
+                  href="/destinations"
+                  className="inline-flex items-center gap-2 bg-[#fa9c24] hover:bg-[#e08b1d] text-white font-semibold px-6 py-3 rounded-full text-xs sm:text-sm shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <span>Browse Destinations</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+
+                {/* Talk to Expert */}
+                <a
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-transparent hover:bg-white/15 text-white border-2 border-white/70 hover:border-white font-semibold px-6 py-3 rounded-full text-xs sm:text-sm transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <span>Talk to Expert</span>
+                </a>
+
+              </div>
+
             </div>
 
-            {/* Heading font size thoda compact kiya */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
-              Let's go, so pack your bags{' '}
-              <span className="font-serif italic font-normal text-amber-100 block sm:inline">
-                For Exciting Trip!
-              </span>
-            </h2>
-
-            <p className="text-sm sm:text-base text-white/95 font-medium leading-relaxed max-w-xl">
-              Unlock exclusive luxury travel deals across Dubai, Abu Dhabi, Maldives, and Europe. Contact our 24/7 concierges now for custom itineraries!
-            </p>
-
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                className="bg-[#1d343e] hover:bg-[#14262e] text-white font-semibold px-6 py-3 rounded-full text-sm sm:text-base tracking-wide shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                Discover More
-              </button>
-
-              <a
-                href="tel:+97143987654"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm sm:text-base font-bold bg-white/10 hover:bg-white text-white hover:text-[#1d343e] backdrop-blur-md border border-white/30 transition-all duration-300 transform hover:scale-105 active:scale-95"
-              >
-                <PhoneCall className="w-4 h-4 text-amber-300" />
-                <span>+971 4 398 7654</span>
-              </a>
+            {/* Right Side Decorative Badge */}
+            <div className="lg:col-span-4 hidden lg:flex items-center justify-end">
+              <div className="relative border-2 border-dashed border-white/40 rounded-full px-8 py-6 text-center transform rotate-[-6deg] bg-white/5 backdrop-blur-xs select-none">
+                <span className="font-serif italic text-2xl sm:text-3xl font-normal text-white/90 tracking-wide block drop-shadow-md">
+                  Adventure Awaits
+                </span>
+              </div>
             </div>
 
           </div>

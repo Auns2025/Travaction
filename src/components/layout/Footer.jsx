@@ -3,7 +3,6 @@ import {
   MapPin,
   Phone,
   Mail,
-  ArrowUp,
   Send,
 } from 'lucide-react'
 import { gsap } from '../../lib/gsap'
@@ -32,20 +31,17 @@ export default function Footer() {
     return () => ctx.revert()
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <footer ref={footerRef} className="relative bg-dark text-white pt-20 pb-10 overflow-hidden border-t border-white/10">
       {/* Top subtle glow background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/10 blur-[100px] pointer-events-none" />
 
+      {/* Main container – centered on large screens */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12 pb-16 border-b border-white/10">
           
-          {/* Column 1: Brand Info */}
-          <div className="footer-col lg:col-span-2 space-y-6">
+          {/* Column 1: Brand Info – takes full width on small, 2 cols on large */}
+          <div className="footer-col sm:col-span-2 lg:col-span-2 space-y-6">
             <a
               href="#"
               className="inline-flex items-center gap-2.5 font-serif text-3xl font-bold tracking-tight text-white group"
@@ -64,16 +60,16 @@ export default function Footer() {
               <span>Travacations</span>
             </a>
             
-            <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-md">
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed max-w-md mx-auto sm:mx-0">
               Premium UAE-based travel & tour company crafting unforgettable bespoke journeys, luxury desert adventures, and seamless global travel experiences.
             </p>
 
             {/* Newsletter Subscription */}
             <div className="pt-2">
-              <h4 className="text-xs uppercase tracking-widest font-semibold text-primary mb-3">
+              <h4 className="text-xs uppercase tracking-widest font-semibold text-primary mb-3 text-center sm:text-left">
                 Subscribe to Exclusive Offers
               </h4>
-              <form onSubmit={(e) => e.preventDefault()} className="flex items-center gap-2 max-w-md">
+              <form onSubmit={(e) => e.preventDefault()} className="flex items-center gap-2 max-w-md mx-auto sm:mx-0">
                 <div className="relative flex-1">
                   <input
                     type="email"
@@ -93,7 +89,7 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Useful Links */}
-          <div className="footer-col space-y-4">
+          <div className="footer-col space-y-4 text-center sm:text-left">
             <h3 className="text-lg font-bold text-white tracking-wide">Useful Links</h3>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {['Home', 'About Us', 'Services', 'Our FAQs', 'Contact Us'].map((link) => (
@@ -110,7 +106,7 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Outbound Destinations */}
-          <div className="footer-col space-y-4">
+          <div className="footer-col space-y-4 text-center sm:text-left">
             <h3 className="text-lg font-bold text-white tracking-wide">Outbound Tours</h3>
             <ul className="space-y-2.5 text-sm text-gray-400">
               {['Europe Escapes', 'Asia Wonders', 'Middle East Jewels', 'Africa Safaris', 'Far East Adventures', 'USA & Canada'].map((dest) => (
@@ -127,25 +123,25 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Contact Info & Socials */}
-          <div className="footer-col space-y-5">
+          <div className="footer-col space-y-5 text-center sm:text-left">
             <h3 className="text-lg font-bold text-white tracking-wide">Get In Touch</h3>
             <div className="space-y-3 text-sm text-gray-400">
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 justify-center sm:justify-start">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                 <span>Suite 402, Business Bay Tower, Downtown Dubai, UAE</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-center sm:justify-start">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
                 <span>+971 4 398 7654</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-center sm:justify-start">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
                 <span>info@travacations.com</span>
               </div>
             </div>
 
             {/* Social Icons with hover pop */}
-            <div className="pt-2 flex items-center gap-3">
+            <div className="pt-2 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
               {/* Instagram */}
               <a
                 href="#"
@@ -205,24 +201,9 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Travacations UAE. All Rights Reserved. Crafted with passion.</p>
-          
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Sitemap</a>
-            
-            {/* Scroll To Top Button */}
-            <button
-              onClick={scrollToTop}
-              className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-primary transition-colors cursor-pointer ml-4"
-              aria-label="Scroll to top"
-            >
-              <ArrowUp className="w-4 h-4" />
-            </button>
-          </div>
+        {/* Bottom Bar – centered */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4 text-xs text-gray-500 text-center">
+          <p>© 2026 Travacations UAE. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

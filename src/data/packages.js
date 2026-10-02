@@ -43,7 +43,7 @@ export const packagesData = [
     price: '$1,050',
     rating: 4.88,
     reviews: 175,
-    image: 'https://images.unsplash.com/photo-1506665531195-3566fe2b4dfa?auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80',
     highlights: ['4★ Beach Resort', 'Ferry Transfers', 'Maya Bay Speedboat', 'Daily Breakfast'],
     badge: 'Top Value',
   },
