@@ -1,26 +1,143 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cream: #F7F1E8;
-  --color-cream-card: #FAF6F0;
-  --color-sand-wave: #E7DAC9;
-  --color-sand-accent: #D7B58B;
-  
-  --color-dark-brown: #2D1C17;
-  --color-warm-brown: #A96F3E;
-  --color-warm-brown-dark: #8E5A2E;
-  --color-muted-brown: #6E625A;
-  
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-script: 'Allura', cursive;
-  --font-sans: 'Poppins', system-ui, sans-serif;
+  --color-primary: #fa9c24;
+  --color-primary-dark: #e08b1d;
+  --color-primary-light: #fbaf4f;
+  --color-primary-peach: #fff7eb;
+
+  --color-secondary: #015fc9;
+  --color-secondary-dark: #014fb0;
+  --color-secondary-light: #3484e4;
+
+  --color-dark: #1d343e;
+  --color-dark-card: #14262e;
+  --color-dark-brown: #1d343e;
+  --color-warm-brown: #fa9c24;
+  --color-warm-brown-dark: #e08b1d;
+  --color-muted-brown: #4a636e;
+  --color-text-dark: #1d343e;
+  --color-text-light: #4a636e;
+  --color-border-light: #e2e8f0;
+
+  --color-cream: #f8fafc;
+  --color-cream-card: #ffffff;
+  --color-sand-wave: #e2e8f0;
+  --color-sand-accent: #fbaf4f;
+
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Caveat', 'Allura', cursive;
+  --font-cursive: 'Caveat', 'Allura', cursive;
+  --font-sans: 'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif;
 }
 
 @layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
   body {
-    background-color: #F7F1E8;
-    color: #2D1C17;
-    font-family: 'Poppins', system-ui, sans-serif;
+    background-color: #f8fafc;
+    color: #1d343e;
+    font-family: 'Plus Jakarta Sans', 'Poppins', system-ui, sans-serif;
     overflow-x: hidden;
   }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #fa9c24;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e08b1d;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-dark {
+  background: rgba(29, 52, 62, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Custom Cursor Styles */
+.custom-cursor-dot {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, opacity 0.2s ease-out;
+}
+
+.custom-cursor-ring {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease-out, height 0.3s ease-out, border-color 0.3s ease-out, background-color 0.3s ease-out;
+}
+
+/* Swiper pagination & navigation overrides */
+.swiper-pagination-bullet-active {
+  background-color: #fa9c24 !important;
+  width: 24px !important;
+  border-radius: 6px !important;
+}
+.swiper-pagination-bullet {
+  transition: all 0.3s ease;
+}
+
+/* Line reveal mask animation wrapper */
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Keyframe for Marquee */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Magnetic button smooth hover */
+.magnetic-btn {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
