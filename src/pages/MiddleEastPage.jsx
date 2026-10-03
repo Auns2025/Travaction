@@ -33,22 +33,22 @@ export default function MiddleEastPage() {
     {
       name: 'Dubai, UAE',
       tagline: 'Futuristic Skyscrapers & Desert Luxury',
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Dubai.png',
     },
     {
       name: 'Abu Dhabi, UAE',
       tagline: 'Grand Architecture & Cultural Heritage',
-      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Abu Dhabi, UAE.png',
     },
     {
       name: 'Muscat, Oman',
       tagline: 'Scenic Coastal Beauty & Rugged Mountains',
-      image: 'https://images.unsplash.com/photo-1549944811-c148c68967d4?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Muscat, Oman.png',
     },
     {
       name: 'AlUla, Saudi Arabia',
       tagline: 'Ancient Wonders & Oasis Landscapes',
-      image: 'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?auto=format&fit=crop&w=800&q=80',
+      image: '/images/AlUla, Saudi Arabia.png',
     },
   ]
 

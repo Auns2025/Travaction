@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { ArrowRight, Star, MapPin, ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionHeading from '../common/SectionHeading'
 import { emiratesList, uaeDestinations } from '../../data/destinations'
@@ -29,10 +29,35 @@ export default function Destinations() {
   const snapRef = useRef(true) // true = jump instantly (mount / tab change / resize)
   const prevSizesRef = useRef(sizes)
   const dragRef = useRef({ startX: 0, moved: false, active: false })
+  const rafRef = useRef(null)
 
   const filteredItems = uaeDestinations.filter(
     (item) => item.emirate.toLowerCase() === activeEmirate.toLowerCase()
   )
+
+  // ===== PILL UPDATE FUNCTION (single source of truth) =====
+  const updatePill = useCallback((animate = true) => {
+    const activeIdx = emiratesList.indexOf(activeEmirate)
+    const activeTab = tabRefs.current[activeIdx]
+    const pill = pillRef.current
+    if (!activeTab || !pill) return
+
+    const x = activeTab.offsetLeft
+    const width = activeTab.offsetWidth
+
+    if (animate) {
+      gsap.to(pill, {
+        x,
+        width,
+        duration: 0.4,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      })
+    } else {
+      gsap.killTweensOf(pill)
+      gsap.set(pill, { x, width })
+    }
+  }, [activeEmirate])
 
   // Keep pixel sizes in sync with the viewport
   useEffect(() => {
@@ -41,10 +66,18 @@ export default function Destinations() {
       setSizes((prev) =>
         prev.active === next.active && prev.inactive === next.inactive ? prev : next
       )
+      // Recalculate pill on resize (instant, no animation)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(() => {
+        updatePill(false)
+      })
     }
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
+    return () => {
+      window.removeEventListener('resize', onResize)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [updatePill])
 
   // Entrance animation on tab change
   useEffect(() => {
@@ -57,33 +90,60 @@ export default function Destinations() {
     }
   }, [activeEmirate])
 
-  // Animated pill indicator under tabs + auto-scroll into view on mobile
+  // Animated pill indicator + auto-scroll into view on mobile
   useEffect(() => {
+    // Animate pill to active tab
+    updatePill(true)
+
+    // Auto-scroll active tab into view on smaller screens
     const activeIdx = emiratesList.indexOf(activeEmirate)
     const activeTab = tabRefs.current[activeIdx]
-    if (activeTab && pillRef.current) {
-      gsap.to(pillRef.current, {
-        x: activeTab.offsetLeft,
-        width: activeTab.offsetWidth,
-        duration: 0.4,
-        ease: 'power3.out',
+    if (tabsContainerRef.current && activeTab && window.innerWidth < 1024) {
+      const container = tabsContainerRef.current
+      const tabLeft = activeTab.offsetLeft
+      const tabWidth = activeTab.offsetWidth
+      const containerWidth = container.clientWidth
+      const targetScroll = tabLeft - containerWidth / 2 + tabWidth / 2
+
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: 'smooth',
       })
-
-      // Auto-scroll active tab into view on smaller screens
-      if (tabsContainerRef.current && window.innerWidth < 1024) {
-        const container = tabsContainerRef.current
-        const tabLeft = activeTab.offsetLeft
-        const tabWidth = activeTab.offsetWidth
-        const containerWidth = container.clientWidth
-        const targetScroll = tabLeft - containerWidth / 2 + tabWidth / 2
-
-        container.scrollTo({
-          left: Math.max(0, targetScroll),
-          behavior: 'smooth',
-        })
-      }
     }
-  }, [activeEmirate])
+  }, [activeEmirate, updatePill])
+
+  // ===== SETUP: ResizeObserver + Font load + initial mount =====
+  useLayoutEffect(() => {
+    // Initial position (no animation)
+    updatePill(false)
+
+    // Recalculate after fonts load (font change => width change)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => updatePill(false))
+    }
+
+    // ResizeObserver on the tabs container (handles any layout shift)
+    let ro
+    if (tabsContainerRef.current && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => {
+        updatePill(false)
+      })
+      ro.observe(tabsContainerRef.current)
+      // Also observe each tab (in case text changes)
+      tabRefs.current.forEach((tab) => tab && ro.observe(tab))
+    }
+
+    // Recalculate on orientation change (mobile rotate)
+    const onOrientation = () => {
+      setTimeout(() => updatePill(false), 100)
+    }
+    window.addEventListener('orientationchange', onOrientation)
+
+    return () => {
+      if (ro) ro.disconnect()
+      window.removeEventListener('orientationchange', onOrientation)
+    }
+  }, [updatePill])
 
   // Single source of truth for slider motion: track position + card widths
   useLayoutEffect(() => {
@@ -237,7 +297,7 @@ export default function Destinations() {
                     className={`relative z-10 px-3.5 xs:px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] xs:text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-300 whitespace-nowrap cursor-pointer ${
                       isActive
                         ? 'text-white'
-                        : 'text-slate-700 hover:text-slate-900'
+                        : 'text-slate-700 lg:hover:text-slate-900'
                     }`}
                   >
                     {emirate}

@@ -33,22 +33,22 @@ export default function AfricaPage() {
     {
       name: 'Serengeti & Masai Mara',
       tagline: 'Wildlife Safaris & Great Migration',
-      image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Serengeti & Masai Mara.png',
     },
     {
       name: 'Cape Town, South Africa',
       tagline: 'Table Mountain & Coastal Splendor',
-      image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Cape Town, South Africa.png',
     },
     {
       name: 'Pyramids of Giza, Egypt',
       tagline: 'Ancient Wonders & Nile Cruises',
-      image: 'https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Pyramids of Giza, Egypt.png',
     },
     {
       name: 'Victoria Falls & Zanzibar',
       tagline: 'Cascading Waterfalls & Pristine Beaches',
-      image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Victoria Falls & Zanzibar.png',
     },
   ]
 

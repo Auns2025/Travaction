@@ -48,11 +48,11 @@ const textColor = 'text-[#1d343e]'
           : 'bg-transparent'
       }`}
     >
-      <div className="flex items-center justify-between w-full h-[75px] md:h-[85px] px-6 md:px-12 lg:px-16">
+      <div className="flex items-center justify-between w-full h-[75px] md:h-[85px] px-4 md:px-12 lg:px-16">
         {/* Logo */}
         <Link
           to="/"
-          className={`group flex items-center gap-2 font-serif text-2xl md:text-3xl font-bold tracking-tight transition-colors ${textColor}`}
+          className={`group flex items-center gap-1.5 md:gap-2 font-serif text-xl md:text-3xl font-bold tracking-tight transition-colors ${textColor}`}
           aria-label="Travacations Home"
         >
           <span className="flex items-center justify-center text-[#fa9c24]">
@@ -159,6 +159,13 @@ const textColor = 'text-[#1d343e]'
             Book Now
           </Link>
         </div>
+
+        <Link
+          to="/contact"
+          className="md:hidden bg-[#fa9c24] hover:bg-[#e08b1d] text-white px-3 py-2 rounded-full text-[11px] font-semibold shadow-sm transition-colors whitespace-nowrap"
+        >
+          Enquire Now
+        </Link>
 
         {/* Mobile Hamburger */}
         <button

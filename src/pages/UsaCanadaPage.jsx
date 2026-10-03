@@ -33,22 +33,22 @@ export default function UsaCanadaPage() {
     {
       name: 'New York City & East Coast',
       tagline: 'Iconic Skylines & Cultural Landmarks',
-      image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80',
+      image: '/images/New York City & East Coast.png',
     },
     {
       name: 'Banff & Canadian Rockies',
       tagline: 'Glacial Lakes & Breathtaking Mountains',
-      image: 'https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Banff & Canadian Rockies.png',
     },
     {
       name: 'Niagara Falls, Canada & USA',
       tagline: 'Majestic Natural Waterfalls & Wonder',
-      image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Niagara Falls Panorama with Tourists.png',
     },
     {
       name: 'Grand Canyon & West Coast',
       tagline: 'Dramatic Canyons & Pacific Highway',
-      image: 'https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Grand Canyon & West Coast.png',
     },
   ]
 

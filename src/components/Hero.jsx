@@ -30,6 +30,24 @@ const Home = () => {
         </g>
       </svg>
 
+      <svg
+        className="absolute top-28 left-0 text-[#fa9c24]/40 pointer-events-none lg:hidden"
+        width="320"
+        height="120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M -20 35 C 55 10, 95 105, 175 78 S 255 60, 300 92"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="4 6"
+        />
+        <g transform="translate(286, 78)">
+          <Plane className="w-5 h-5 text-[#fa9c24] fill-[#fa9c24] rotate-45" />
+        </g>
+      </svg>
+
       {/* Decorative "Collect Moments" — desktop only */}
       <div className="hidden lg:block absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
         <div className="font-['Caveat',cursive] text-3xl text-[#1d343e]/80 rotate-[-8deg] leading-snug font-bold relative">
@@ -59,14 +77,14 @@ const Home = () => {
       </div>
 
       {/* ===== MAIN CONTENT ===== */}
-      <div className="max-w-7xl mx-auto w-full px-4 xs:px-5 sm:px-8 md:px-12 lg:px-16 pt-24 xs:pt-26 sm:pt-28 md:pt-32 pb-12 sm:pb-16 lg:pb-20 relative z-10">
+      <div className="max-w-7xl mx-auto w-full px-4 xs:px-5 sm:px-8 md:px-12 lg:px-16 pt-24 xs:pt-26 sm:pt-28 md:pt-32 pb-0 lg:pb-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
 
           {/* ===== LEFT: TEXT CONTENT ===== */}
           {/* Mobile: order-1 (text first) | Desktop: order-1 (left) */}
-          <div className="lg:col-span-6 text-center lg:text-left order-1">
+          <div className="relative z-10 lg:col-span-6 text-left lg:text-left order-1 max-lg:w-[54%]">
             {/* Eyebrow pill */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 xs:px-4 py-1.5 rounded-full bg-white border border-[#fa9c24]/30 text-[#fa9c24] text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest mb-4 sm:mb-5 shadow-sm">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 xs:px-3 sm:px-4 py-1.5 rounded-full bg-white border border-[#fa9c24]/30 text-[#fa9c24] text-[8px] xs:text-[9px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest mb-4 sm:mb-5 shadow-sm whitespace-nowrap">
               <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#fa9c24] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-[#fa9c24]"></span>
@@ -76,11 +94,11 @@ const Home = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="font-serif font-medium text-[#1d343e] leading-[1.05] tracking-tight text-[32px] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem]">
+            <h1 className="font-serif font-medium text-[#1d343e] leading-[1.05] tracking-tight text-[27px] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem]">
               Discover the
               <br />
               <span className="relative inline-block">
-                <span className="font-cursive italic font-normal text-[#fa9c24] text-[40px] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6rem]">
+                <span className="font-cursive italic font-normal text-[#fa9c24] text-[34px] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6rem] whitespace-nowrap">
                   Extraordinary
                 </span>
                 <svg
@@ -98,33 +116,33 @@ const Home = () => {
                 </svg>
               </span>
               <br />
-              with Travacations
+              with<br className="lg:hidden" /> Travacations
             </h1>
 
             {/* Subtext */}
-            <p className="mt-4 sm:mt-6 text-[#1d343e]/70 text-[13px] xs:text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+            <p className="mt-4 sm:mt-6 text-[#1d343e]/70 text-[11px] xs:text-xs sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed max-w-xl mx-0 lg:mx-0">
               Bespoke luxury journeys, desert adventures, and unforgettable global escapes — crafted just for you from the heart of Dubai.
             </p>
 
             {/* CTA buttons */}
-            <div className="mt-6 sm:mt-8 lg:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-center lg:justify-start">
-              <button className="group w-full sm:w-auto bg-[#fa9c24] hover:bg-[#e08b1d] transition-all duration-300 text-white px-6 xs:px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-xs xs:text-sm sm:text-base font-bold uppercase tracking-wider shadow-lg shadow-[#fa9c24]/30 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2.5 sm:gap-3">
+            <div className="mt-5 sm:mt-8 lg:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 justify-start lg:justify-start">
+              <button className="group w-full sm:w-auto max-lg:max-w-[180px] bg-[#fa9c24] hover:bg-[#e08b1d] transition-all duration-300 text-white px-4 xs:px-6 sm:px-8 py-3 sm:py-4 rounded-full text-[10px] xs:text-xs sm:text-base font-bold uppercase tracking-wider shadow-lg shadow-[#fa9c24]/30 hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2.5 sm:gap-3">
                 Plan Your Trip
                 <ArrowRight size={16} className="sm:hidden transition-transform duration-300 group-hover:translate-x-1" />
                 <ArrowRight size={18} className="hidden sm:block transition-transform duration-300 group-hover:translate-x-1" />
               </button>
 
-              <button className="group w-full sm:w-auto bg-white hover:bg-[#1d343e] hover:text-white border border-[#1d343e]/15 text-[#1d343e] px-5 xs:px-6 py-3.5 sm:py-4 rounded-full text-xs xs:text-sm sm:text-base font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 sm:gap-3">
+              <button className="group w-full sm:w-auto max-lg:max-w-[180px] bg-white hover:bg-[#1d343e] hover:text-white border border-[#1d343e]/15 text-[#1d343e] px-4 xs:px-6 py-3 sm:py-4 rounded-full text-[10px] xs:text-xs sm:text-base font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 sm:gap-3">
                 <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#fa9c24]/15 group-hover:bg-[#fa9c24]/30 flex items-center justify-center transition-colors">
                   <Play size={10} className="sm:hidden fill-current ml-0.5" />
                   <Play size={12} className="hidden sm:block fill-current ml-0.5" />
                 </span>
-                Watch Reel
+                Watch Here
               </button>
             </div>
 
             {/* Trust badges row */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 lg:gap-6">
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 lg:gap-6 max-lg:hidden">
               <div className="flex items-center gap-1.5 sm:gap-2 text-[#1d343e]/60">
                 <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#fa9c24]" />
                 <span className="text-[10px] xs:text-[11px] sm:text-xs font-bold uppercase tracking-wider">Licensed & Insured</span>
@@ -140,7 +158,7 @@ const Home = () => {
             </div>
 
             {/* Trust stats row */}
-            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#1d343e]/10 flex flex-wrap items-center justify-center lg:justify-start gap-4 xs:gap-6 sm:gap-10">
+            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#1d343e]/10 flex flex-wrap items-center justify-center lg:justify-start gap-4 xs:gap-6 sm:gap-10 max-lg:hidden">
               <div className="text-center lg:text-left">
                 <div className="flex items-center gap-1 justify-center lg:justify-start">
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-[#fa9c24] text-[#fa9c24]" />
@@ -173,7 +191,7 @@ const Home = () => {
 
           {/* ===== RIGHT: IMAGE COLLAGE ===== */}
           {/* Mobile: order-2 (image second) | Desktop: order-2 (right) */}
-          <div className="lg:col-span-6 order-2 relative">
+          <div className="lg:col-span-6 order-2 relative max-lg:absolute max-lg:top-[150px] max-lg:right-0 max-lg:w-[42%] max-lg:z-0">
             <div className="relative w-full max-w-[300px] xs:max-w-xs sm:max-w-md md:max-w-lg lg:max-w-none mx-auto">
 
               {/* Main large image */}
@@ -212,7 +230,7 @@ const Home = () => {
               </div>
 
               {/* Floating small image — bottom left */}
-              <div className="absolute -bottom-3 -left-3 xs:-bottom-4 xs:-left-4 sm:-bottom-6 sm:-left-6 w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-500 hidden sm:block cursor-pointer">
+              <div className="absolute -bottom-3 -left-3 xs:-bottom-4 xs:-left-4 sm:-bottom-6 sm:-left-6 w-16 h-20 xs:w-20 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-500 cursor-pointer">
                 <img src={womanImg} alt="Traveler" className="w-full h-full object-cover" />
               </div>
 
@@ -224,10 +242,12 @@ const Home = () => {
                 </div>
                 <div className="min-w-0">
                   <p className="text-[7px] xs:text-[8px] sm:text-[10px] font-bold text-[#1d343e]/60 uppercase tracking-wider">
-                    Live Now
+                    <span className="hidden lg:inline">Live Now</span>
+                    <span className="lg:hidden">Live Your</span>
                   </p>
                   <p className="text-[9px] xs:text-[10px] sm:text-xs font-bold text-[#1d343e] font-serif whitespace-nowrap">
-                    128 booked
+                    <span className="hidden lg:inline">128 booked</span>
+                    <span className="lg:hidden">Next Adventure</span>
                   </p>
                 </div>
               </div>
@@ -239,6 +259,31 @@ const Home = () => {
             </div>
           </div>
 
+          <div className="order-3 col-span-1 lg:hidden mt-8 border-y border-[#1d343e]/10 py-4 flex items-center justify-between gap-2">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1">
+                <Star className="w-3.5 h-3.5 fill-[#fa9c24] text-[#fa9c24]" />
+                <span className="text-xl font-extrabold text-[#1d343e] font-serif">4.9</span>
+              </div>
+              <p className="text-[8px] xs:text-[9px] font-bold text-[#1d343e]/60 uppercase tracking-wide mt-1">
+                Traveller Rating
+              </p>
+            </div>
+            <div className="w-px h-10 bg-[#1d343e]/10" />
+            <div className="text-center">
+              <span className="text-xl font-extrabold text-[#1d343e] font-serif">15+</span>
+              <p className="text-[8px] xs:text-[9px] font-bold text-[#1d343e]/60 uppercase tracking-wide mt-1">
+                Travel Experiences
+              </p>
+            </div>
+            <div className="w-px h-10 bg-[#1d343e]/10" />
+            <div className="text-center">
+              <span className="text-xl font-extrabold text-[#1d343e] font-serif">50K+</span>
+              <p className="text-[8px] xs:text-[9px] font-bold text-[#1d343e]/60 uppercase tracking-wide mt-1">
+                Happy Travellers
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 

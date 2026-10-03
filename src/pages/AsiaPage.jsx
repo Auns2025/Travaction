@@ -33,22 +33,22 @@ export default function AsiaPage() {
     {
       name: 'Bangkok, Thailand',
       tagline: 'Vibrant Streets & Golden Temples',
-      image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Thailand2.png',
     },
     {
       name: 'Bali, Indonesia',
       tagline: 'Cultural Charm & Island Sanctuaries',
-      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Bali.png',
     },
     {
       name: 'Tokyo & Mt. Fuji, Japan',
       tagline: 'Breathtaking Landscapes & Heritage',
-      image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Tokyo.png',
     },
     {
       name: 'Maldives Islands',
       tagline: 'Tropical Beauty & Overwater Resorts',
-      image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Maldives.png',
     },
   ]
 

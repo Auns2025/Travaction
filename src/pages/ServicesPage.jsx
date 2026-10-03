@@ -30,7 +30,7 @@ export default function ServicesPage() {
       description:
         'Experience 4x4 dune bashing, quad biking, camel rides, traditional Bedouin camp dinners, and breathtaking sunrise hot air balloon flights over desert dunes.',
       highlights: ['VIP Bedouin Camp Dinner', 'Quad Biking & Dune Bashing', 'Hot Air Balloon Sunrise'],
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Golden Desert Safari at Sunset.png',
     },
     {
       id: 'yacht',
@@ -40,7 +40,7 @@ export default function ServicesPage() {
       description:
         'Sail through Dubai Marina and Palm Jumeirah aboard private luxury yachts or enjoy romantic dhow dinner cruises featuring gourmet dining and live shows.',
       highlights: ['Private Yacht Rental (33ft–100ft)', 'Dubai Marina Dhow Dinner Cruise', 'Water Sports & Jet Skiing'],
-      image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Marina Dhow Cruise.png',
     },
     {
       id: 'flights',
@@ -50,7 +50,7 @@ export default function ServicesPage() {
       description:
         'Reserve worldwide flight tickets with our Best Price Guarantee across premier international airlines with instant confirmation and flexible seat selection.',
       highlights: ['Best Price Guarantee', 'Instant E-Ticket Delivery', '24/7 Date Rescheduling'],
-      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80',
+      image: '/images/flights.png',
     },
     {
       id: 'visas',
@@ -60,7 +60,7 @@ export default function ServicesPage() {
       description:
         'Fast-track 30-day and 60-day UAE tourist visa applications, visa extensions, and travel documentation with expert guidance and high approval rates.',
       highlights: ['30 & 60-Day Express Tourist Visa', 'Hassle-Free Online Processing', 'Comprehensive Travel Insurance'],
-      image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80',
+      image: '/images/UAE Travel Visa Over Dubai Skyline.png',
     },
     {
       id: 'hotels',
@@ -70,7 +70,7 @@ export default function ServicesPage() {
       description:
         'Unlock exclusive rates and VIP perks at iconic 5-star hotels—including Burj Al Arab, Atlantis The Palm, Maldives overwater villas, and European retreats.',
       highlights: ['Complimentary Room Upgrades', 'Burj Al Arab & Atlantis Deals', 'Maldives Overwater Bungalows'],
-      image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Golden-Hour Dubai Resort Welcome.png',
     },
     {
       id: 'transfers',
@@ -80,7 +80,7 @@ export default function ServicesPage() {
       description:
         'Arrive in style with private luxury airport transfers, executive Mercedes-Benz chauffeur rentals, and sports car hire across Dubai and Abu Dhabi.',
       highlights: ['24/7 Dubai Airport Meet & Greet', 'Luxury Executive Chauffeur', 'Supercar & SUV Rentals'],
-      image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80',
+      image: '/images/VIP Chauffeur Arrival at Dubai Departures.png',
     },
     {
       id: 'guides',
@@ -90,7 +90,7 @@ export default function ServicesPage() {
       description:
         'Discover the rich heritage and futuristic architecture of the UAE with expert licensed tour guides offering private custom city excursions.',
       highlights: ['Private Custom City Itineraries', 'Multilingual Concierge Guides', 'Skip-the-Line Attraction Passes'],
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Guided Dubai Heritage and Skyline Tour.png',
     },
     {
       id: 'corporate',
@@ -100,7 +100,7 @@ export default function ServicesPage() {
       description:
         'Tailored corporate travel management, incentive delegation trips, international conference arrangements, and team retreat packages.',
       highlights: ['Tailored Corporate Delegation Travel', 'Conference & Event Logistics', 'Exclusive Group Discounts'],
-      image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Luxury MICE Event at Sunset.png',
     },
   ]
 

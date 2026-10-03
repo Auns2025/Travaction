@@ -33,22 +33,22 @@ export default function FarEastPage() {
     {
       name: 'Tokyo & Kyoto, Japan',
       tagline: 'Futuristic Metropolises & Ancient Shrines',
-      image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Tokyo & Kyoto, Japan.png',
     },
     {
       name: 'Seoul & Jeju Island, S. Korea',
       tagline: 'K-Culture, Palaces & Volcanic Wonders',
-      image: 'https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Seoul & Jeju Island, S. Korea.png',
     },
     {
       name: 'Singapore & Sentosa',
       tagline: 'Garden City Luxury & World-Class Resorts',
-      image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Singapore.png',
     },
     {
       name: 'Hong Kong & Macau',
       tagline: 'Iconic Skylines & Vibrant Harbor Culture',
-      image: 'https://images.unsplash.com/photo-1506970845246-18f21d533b20?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Hong Kong & Macau.png',
     },
   ]
 

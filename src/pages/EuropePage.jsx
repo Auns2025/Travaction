@@ -33,22 +33,22 @@ export default function EuropePage() {
     {
       name: 'Paris, France',
       tagline: 'Romantic Streets & Iconic Landmarks',
-      image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Paris, France.png',
     },
     {
       name: 'Rome, Italy',
       tagline: 'Historic Charm & Colosseum Heritage',
-      image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Rome, Italy.png',
     },
     {
       name: 'Swiss Alps, Switzerland',
       tagline: 'Scenic Alpine Beauty & Snow Peaks',
-      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Swiss Alps, Switzerland.png',
     },
     {
       name: 'Barcelona, Spain',
       tagline: 'Vibrant Atmosphere & Mediterranean Coast',
-      image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=800&q=80',
+      image: '/images/Barcelona, Spain.png',
     },
   ]
 
