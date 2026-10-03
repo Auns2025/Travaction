@@ -43,7 +43,7 @@ export default function UsaCanadaPage() {
     {
       name: 'Niagara Falls, Canada & USA',
       tagline: 'Majestic Natural Waterfalls & Wonder',
-      image: '/images/Niagara Falls Panorama with Tourists.png',
+      image: '/images/Niagara Falls Panorama with Tourists.jpg',
     },
     {
       name: 'Grand Canyon & West Coast',

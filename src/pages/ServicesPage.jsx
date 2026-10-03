@@ -30,7 +30,7 @@ export default function ServicesPage() {
       description:
         'Experience 4x4 dune bashing, quad biking, camel rides, traditional Bedouin camp dinners, and breathtaking sunrise hot air balloon flights over desert dunes.',
       highlights: ['VIP Bedouin Camp Dinner', 'Quad Biking & Dune Bashing', 'Hot Air Balloon Sunrise'],
-      image: '/images/Golden Desert Safari at Sunset.png',
+      image: '/images/Golden Desert Safari at Sunset.jpg',
     },
     {
       id: 'yacht',
@@ -60,7 +60,7 @@ export default function ServicesPage() {
       description:
         'Fast-track 30-day and 60-day UAE tourist visa applications, visa extensions, and travel documentation with expert guidance and high approval rates.',
       highlights: ['30 & 60-Day Express Tourist Visa', 'Hassle-Free Online Processing', 'Comprehensive Travel Insurance'],
-      image: '/images/UAE Travel Visa Over Dubai Skyline.png',
+      image: '/images/UAE Travel Visa Over Dubai Skyline.jpg',
     },
     {
       id: 'hotels',
@@ -70,7 +70,7 @@ export default function ServicesPage() {
       description:
         'Unlock exclusive rates and VIP perks at iconic 5-star hotels—including Burj Al Arab, Atlantis The Palm, Maldives overwater villas, and European retreats.',
       highlights: ['Complimentary Room Upgrades', 'Burj Al Arab & Atlantis Deals', 'Maldives Overwater Bungalows'],
-      image: '/images/Golden-Hour Dubai Resort Welcome.png',
+      image: '/images/Golden-Hour Dubai Resort Welcome.jpg',
     },
     {
       id: 'transfers',
@@ -80,7 +80,7 @@ export default function ServicesPage() {
       description:
         'Arrive in style with private luxury airport transfers, executive Mercedes-Benz chauffeur rentals, and sports car hire across Dubai and Abu Dhabi.',
       highlights: ['24/7 Dubai Airport Meet & Greet', 'Luxury Executive Chauffeur', 'Supercar & SUV Rentals'],
-      image: '/images/VIP Chauffeur Arrival at Dubai Departures.png',
+      image: '/images/VIP Chauffeur Arrival at Dubai Departures.jpg',
     },
     {
       id: 'guides',
@@ -90,7 +90,7 @@ export default function ServicesPage() {
       description:
         'Discover the rich heritage and futuristic architecture of the UAE with expert licensed tour guides offering private custom city excursions.',
       highlights: ['Private Custom City Itineraries', 'Multilingual Concierge Guides', 'Skip-the-Line Attraction Passes'],
-      image: '/images/Guided Dubai Heritage and Skyline Tour.png',
+      image: '/images/Guided Dubai Heritage and Skyline Tour.jpg',
     },
     {
       id: 'corporate',
