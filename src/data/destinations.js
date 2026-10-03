@@ -258,7 +258,7 @@ export const uaeDestinations = [
     title: 'Al Marjan Island',
     emirate: 'Ras Al Khaimah',
     tagline: 'Pristine Beach Resorts',
-    image: '/images/Aerial Paradise of Curved Island Resorts.png',
+    image: '/images/Aerial Paradise of Curved Island Resorts.jpg',
     featured: false,
     height: 'medium',
     rating: 4.85,
