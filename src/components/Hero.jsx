@@ -196,13 +196,15 @@ const Home = () => {
 
               {/* Main large image */}
               <div className="relative rounded-2xl xs:rounded-3xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white aspect-[4/5] group">
-                <img
-  src={amalfiCoast}
+               <img
+  src={amalfiImg}
   alt="Amalfi Coast"
   fetchPriority="high"
   loading="eager"
   decoding="async"
-  className="w-full h-full object-cover transition-transform duration-700..."
+  width="800"
+  height="1000"
+  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1d343e]/50 via-transparent to-transparent" />
 
