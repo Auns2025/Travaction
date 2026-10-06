@@ -36,7 +36,7 @@ export default function CTA() {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
             style={{
-              backgroundImage: `url('/images/fjord-sunset.png')`,
+              backgroundImage: `url('/images/fjord-sunset.jpg')`,
             }}
           />
 
