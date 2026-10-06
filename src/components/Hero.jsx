@@ -1,5 +1,5 @@
 import { ArrowRight, Plane, MapPin, Star, Compass, Users, Award, ShieldCheck, Play } from "lucide-react";
-import amalfiImg from "../assets/amalfi_coast.webp";
+import amalfiImg from "../assets/amalfi_coast.png";
 import womanImg from "../assets/woman_walking.jpg";
 import balloonsImg from "../assets/hot_air_balloons.jpg";
 
@@ -196,16 +196,11 @@ const Home = () => {
 
               {/* Main large image */}
               <div className="relative rounded-2xl xs:rounded-3xl sm:rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white aspect-[4/5] group">
-               <img
-  src={amalfiImg}
-  alt="Amalfi Coast"
-  fetchPriority="high"
-  loading="eager"
-  decoding="async"
-  width="800"
-  height="1000"
-  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-/>
+                <img
+                  src={amalfiImg}
+                  alt="Amalfi Coast"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1d343e]/50 via-transparent to-transparent" />
 
                 {/* Location pill overlay */}
@@ -231,24 +226,12 @@ const Home = () => {
 
               {/* Floating small image — top right */}
               <div className="absolute -top-3 -right-3 xs:-top-4 xs:-right-4 sm:-top-6 sm:-right-6 w-20 h-20 xs:w-24 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-500 cursor-pointer">
-                <img
-  src={balloonsImg}
-  alt="Hot Air Balloons"
-  loading="lazy"
-  decoding="async"
-  className="w-full h-full object-cover"
-/>
+                <img src={balloonsImg} alt="Hot Air Balloons" className="w-full h-full object-cover" />
               </div>
 
               {/* Floating small image — bottom left */}
               <div className="absolute -bottom-3 -left-3 xs:-bottom-4 xs:-left-4 sm:-bottom-6 sm:-left-6 w-16 h-20 xs:w-20 xs:h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-xl xs:rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-[3px] sm:border-4 border-white -rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-500 cursor-pointer">
-                <img
-  src={womanImg}
-  alt="Traveler"
-  loading="lazy"
-  decoding="async"
-  className="w-full h-full object-cover"
-/>
+                <img src={womanImg} alt="Traveler" className="w-full h-full object-cover" />
               </div>
 
               {/* Live Trip badge - top left */}
